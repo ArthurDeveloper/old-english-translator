@@ -8,3 +8,8 @@
 	font-family: Arial, sans-serif;
 	margin: 2rem 0 2rem 0;
 }
+
+#translated-text {
+	font-family: monospace;
+	text-transform: capitalize;
+}
