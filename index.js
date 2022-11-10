@@ -1,4 +1,5 @@
-const lastText = localStorage.getItem('last-translation');
+const lastText = localStorage.getItem('last-text');
+const lastTranslation = localStorage.getItem('last-translation');
 
 function escapeNewEnglishWords(text) {
 	const regexp = /\{(.*?)\}/g;
@@ -6,16 +7,26 @@ function escapeNewEnglishWords(text) {
 }
 
 function showTranslatedText(text) {
-	document.querySelector('#translated-text').textContent = text;
+	document.querySelector('#old-english-text').value = text;
 }
 
-if (!lastText) {
-	fetch('https://api.funtranslations.com/translate/oldenglish.json?text=\'Slipping through my fingers all the time\'')
-		.then((res) => res.json())
-		.then((text) => {
-			showTranslatedText(escapeNewEnglishWords(text.contents.translated));
-			localStorage.setItem('last-translation', text.contents.translated);
-		});
-} else {
-	showTranslatedText(escapeNewEnglishWords(lastText));
-}
+const formElement = document.querySelector('#translation-form');
+
+formElement.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	const modernEnglishText = document.querySelector('#modern-english-text');
+
+	if (lastText !== modernEnglishText) {
+		fetch(`https://api.funtranslations.com/translate/oldenglish.json?text=${modernEnglishText.value}`)
+			.then((res) => res.json())
+			.then((text) => {
+				showTranslatedText(escapeNewEnglishWords(text.contents.translated));
+				
+				localStorage.setItem('last-text', modernEnglishText);
+				localStorage.setItem('last-translation', text.contents.translated);
+			});
+	} else {
+		showTranslatedText(escapeNewEnglishWords(lastTranslation));
+	}
+});

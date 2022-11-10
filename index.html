@@ -12,10 +12,12 @@
 <body>
 	<h1 class="heading">Old English Translator</h1>
 
-	<div>
-		<!--<input type="text" id="modern-english-text" /> -->
-		<span id="translated-text" />
-	</div>
+	<form id="translation-form">
+		<textarea class="translation-form-input" id="modern-english-text" placeholder="Modern English"></textarea>
+		<textarea class="translation-form-input" id="old-english-text" placeholder="Old English"/></textarea>
+		
+		<button type="submit">Translate</button>
+	</form>
 
 	<script src="index.js"></script>
 </body>

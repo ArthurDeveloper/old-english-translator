@@ -9,7 +9,7 @@
 	margin: 2rem 0 2rem 0;
 }
 
-#translated-text {
+.translation-form-input {
 	font-family: monospace;
 	text-transform: capitalize;
 }
